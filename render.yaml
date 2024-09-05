@@ -1,0 +1,7 @@
+services:  
+  - type: web    
+  name: django    
+  env: python    
+  buildCommand: "./build.sh"    
+  startCommand: "gunicorn zshoppingly.wsgi:application"    
+  staticPublishPath: static
