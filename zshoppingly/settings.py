@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,12 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4=2%711r(xn0+2icew7kkii3syg6^vblmync!y7v3tisz026z^'
+# SECRET_KEY = 'django-insecure-4=2%711r(xn0+2icew7kkii3syg6^vblmync!y7v3tisz026z^'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4=2%711r(xn0+2icew7kkii3syg6^vblmync!y7v3tisz026z^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -105,6 +107,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
 LOGIN_REDIRECT_URL='/profile/'
@@ -114,3 +122,4 @@ SESSION_ENGINE="django.contrib.sessions.backends.db"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
